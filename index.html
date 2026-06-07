@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rainy Desk Lo-Fi</title>
+    <link rel="preload" href="lofi-room.png" as="image">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="stage">
+      <section class="workspace" aria-label="Lo-fi workspace">
+        <header class="topbar">
+          <a class="brand" href="#" aria-label="Rainy Desk home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Rainy Desk</span>
+          </a>
+          <nav class="nav" aria-label="Primary">
+            <a href="#player">Player</a>
+            <a href="#focus">Focus</a>
+            <a href="#notes">Notes</a>
+          </nav>
+        </header>
+
+        <div class="hero">
+          <section class="intro" aria-labelledby="page-title">
+            <p class="eyebrow">lo-fi room 02:17 AM</p>
+            <h1 id="page-title">Rain on glass, tape in motion.</h1>
+            <p class="summary">A quiet browser desk for music, focus blocks, and late notes.</p>
+          </section>
+
+          <section class="player-panel" id="player" aria-label="Ambient player">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Now spinning</p>
+                <h2>Window Seat</h2>
+              </div>
+              <button class="icon-button" id="themeToggle" type="button" title="Switch tone" aria-label="Switch tone">
+                <span class="icon-sun" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <canvas id="visualizer" width="720" height="180" aria-label="Audio visualizer"></canvas>
+
+            <div class="transport">
+              <button class="icon-button small" id="prevTrack" type="button" title="Previous track" aria-label="Previous track">
+                <span class="icon-prev" aria-hidden="true"></span>
+              </button>
+              <button class="play-button" id="playToggle" type="button" title="Play" aria-label="Play">
+                <span class="icon-play" aria-hidden="true"></span>
+              </button>
+              <button class="icon-button small" id="nextTrack" type="button" title="Next track" aria-label="Next track">
+                <span class="icon-next" aria-hidden="true"></span>
+              </button>
+            </div>
+
+            <div class="track-meta">
+              <span id="trackName">Window Seat</span>
+              <span id="trackMood">mellow keys</span>
+            </div>
+
+            <div class="control-list" aria-label="Mixer">
+              <label>
+                <span>Rain</span>
+                <input id="rainLevel" type="range" min="0" max="100" value="58">
+              </label>
+              <label>
+                <span>Vinyl</span>
+                <input id="vinylLevel" type="range" min="0" max="100" value="38">
+              </label>
+              <label>
+                <span>Keys</span>
+                <input id="keysLevel" type="range" min="0" max="100" value="70">
+              </label>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="tool-band" aria-label="Focus tools">
+        <div class="tool-grid">
+          <section class="tool-panel" id="focus" aria-labelledby="focus-title">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Focus block</p>
+                <h2 id="focus-title">25:00</h2>
+              </div>
+              <button class="icon-button" id="timerToggle" type="button" title="Start focus" aria-label="Start focus">
+                <span class="icon-play" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="timer-ring" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-base" cx="60" cy="60" r="52"></circle>
+                <circle class="ring-progress" id="ringProgress" cx="60" cy="60" r="52"></circle>
+              </svg>
+              <span id="sessionLabel">deep work</span>
+            </div>
+            <div class="segmented" aria-label="Timer length">
+              <button class="active" data-minutes="25" type="button">25</button>
+              <button data-minutes="15" type="button">15</button>
+              <button data-minutes="5" type="button">5</button>
+            </div>
+          </section>
+
+          <section class="tool-panel" aria-labelledby="queue-title">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Queue</p>
+                <h2 id="queue-title">Midnight Mix</h2>
+              </div>
+              <button class="icon-button" id="shuffleTracks" type="button" title="Shuffle queue" aria-label="Shuffle queue">
+                <span class="icon-shuffle" aria-hidden="true"></span>
+              </button>
+            </div>
+            <ol class="track-list" id="trackList"></ol>
+          </section>
+
+          <section class="tool-panel notes-panel" id="notes" aria-labelledby="notes-title">
+            <div class="panel-heading compact">
+              <div>
+                <p class="eyebrow">Notes</p>
+                <h2 id="notes-title">Desk Pad</h2>
+              </div>
+              <button class="icon-button" id="clearNotes" type="button" title="Clear notes" aria-label="Clear notes">
+                <span class="icon-clear" aria-hidden="true"></span>
+              </button>
+            </div>
+            <textarea id="notePad" spellcheck="false" placeholder="Fragments, tasks, loose thoughts..."></textarea>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
