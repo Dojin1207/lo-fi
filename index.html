@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lo-Fi Room</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="background-layer" id="backgroundLayer" aria-hidden="true"></div>
+    <div class="scene-shade" aria-hidden="true"></div>
+
+    <button class="lamp-hotspot" id="lampHotspot" type="button" aria-label="Toggle desk light" aria-pressed="true">
+      <span></span>
+    </button>
+
+    <header class="top-bar">
+      <div class="clock" aria-label="Current time">
+        <span id="clockDate">2026년 06월 08일 월요일</span>
+        <time id="clockTime">02:03</time>
+      </div>
+
+      <button class="icon-button settings-button" id="settingsButton" type="button" aria-label="Open settings" title="Settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
+          <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.05.05a2.05 2.05 0 0 1 0 2.9 2.05 2.05 0 0 1-2.9 0l-.05-.05a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56v.14A2.05 2.05 0 0 1 11.87 23h-.14a2.05 2.05 0 0 1-2.05-2.05v-.08a1.7 1.7 0 0 0-1.11-1.58 1.7 1.7 0 0 0-1.85.35l-.05.05a2.05 2.05 0 0 1-2.9 0 2.05 2.05 0 0 1 0-2.9l.05-.05a1.7 1.7 0 0 0 .35-1.85 1.7 1.7 0 0 0-1.58-1.11h-.08A2.05 2.05 0 0 1 .5 11.73v-.14a2.05 2.05 0 0 1 2.05-2.05h.14a1.7 1.7 0 0 0 1.56-1.04 1.7 1.7 0 0 0-.34-1.88l-.05-.05a2.05 2.05 0 0 1 0-2.9 2.05 2.05 0 0 1 2.9 0l.05.05a1.7 1.7 0 0 0 1.88.34h.01A1.7 1.7 0 0 0 9.74 2.5v-.14A2.05 2.05 0 0 1 11.79.31h.14a2.05 2.05 0 0 1 2.05 2.05v.14a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.05-.05a2.05 2.05 0 0 1 2.9 0 2.05 2.05 0 0 1 0 2.9l-.05.05a1.7 1.7 0 0 0-.34 1.88v.01a1.7 1.7 0 0 0 1.56 1.04h.14a2.05 2.05 0 0 1 2.05 2.05v.14a2.05 2.05 0 0 1-2.05 2.05h-.14A1.7 1.7 0 0 0 19.4 15Z" />
+        </svg>
+      </button>
+    </header>
+
+    <section class="today-widget glass-card" aria-label="Today todo">
+      <h2>TODO</h2>
+      <form class="todo-form" id="todoForm">
+        <input id="todoInput" type="text" placeholder="Add today's task" autocomplete="off" />
+        <button type="submit" aria-label="Add task">+</button>
+      </form>
+      <ul class="todo-list" id="todoList"></ul>
+    </section>
+
+    <section class="bottom-ui" aria-label="Lo-fi controls">
+      <section class="player-dock" aria-label="Lo-fi player">
+        <div class="listen-widget">
+          <div class="widget-topline">
+            <span>Lo-Fi</span>
+            <span id="trackType">Ambient</span>
+          </div>
+
+          <section class="gif-stage" id="gifStage" aria-label="Widget GIF or MP4 area">
+            <img class="gif-media gif-image" id="gifImage" alt="" hidden />
+            <video class="gif-media gif-video" id="gifVideo" muted loop autoplay playsinline hidden></video>
+            <div class="visualizer" id="fallbackVisualizer" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </section>
+
+          <div class="now-playing">
+            <h1 id="trackTitle">Rain Window</h1>
+            <p id="trackSubtitle">soft keys / gentle rain</p>
+          </div>
+
+          <label class="volume-control" for="volumeSlider">
+            <span>Volume</span>
+            <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="0.62" />
+          </label>
+        </div>
+
+        <div class="transport" aria-label="Playback controls">
+          <button class="transport-button" id="prevButton" type="button" aria-label="Previous track" title="Previous track">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 5h2v14H5z" />
+              <path d="m19 6-9 6 9 6V6Z" />
+            </svg>
+          </button>
+          <button class="transport-button play-button" id="playButton" type="button" aria-label="Play" title="Play">
+            <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7L8 5Z" />
+            </svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 5h4v14H7z" />
+              <path d="M13 5h4v14h-4z" />
+            </svg>
+          </button>
+          <button class="transport-button" id="nextButton" type="button" aria-label="Next track" title="Next track">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m5 6 9 6-9 6V6Z" />
+              <path d="M17 5h2v14h-2z" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="ambient-mixer glass-card" aria-label="Ambient mixer">
+        <h2>AMBIENT MIXER</h2>
+        <label class="mixer-row" for="mixerRain">
+          <span>Rain</span>
+          <input id="mixerRain" type="range" min="0" max="1" step="0.01" value="0.45" />
+        </label>
+        <label class="mixer-row" for="mixerCity">
+          <span>City Hum</span>
+          <input id="mixerCity" type="range" min="0" max="1" step="0.01" value="0.2" />
+        </label>
+        <label class="mixer-row" for="mixerCoffee">
+          <span>Coffee Shop</span>
+          <input id="mixerCoffee" type="range" min="0" max="1" step="0.01" value="0.15" />
+        </label>
+      </section>
+    </section>
+
+    <div class="panel-backdrop" id="panelBackdrop" hidden></div>
+
+    <aside class="settings-panel" id="settingsPanel" aria-hidden="true" aria-label="Settings">
+      <div class="panel-header">
+        <h2>Settings</h2>
+        <button class="icon-button" id="closeSettingsButton" type="button" aria-label="Close settings" title="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6 18 18" />
+            <path d="M18 6 6 18" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="panel-section">
+        <h3>Background Image</h3>
+        <label class="file-action" for="backgroundFile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5h16v14H4z" />
+            <path d="m4 16 4.8-4.8 3.4 3.4 2-2L20 18" />
+            <path d="M14.5 8.5h.01" />
+          </svg>
+          <span>Choose File</span>
+        </label>
+        <input id="backgroundFile" type="file" accept="image/*" />
+        <div class="input-row">
+          <input id="backgroundUrl" type="url" placeholder="Image URL" autocomplete="off" />
+          <button id="applyBackgroundUrl" type="button">Apply</button>
+        </div>
+        <button class="secondary-action" id="resetBackgroundButton" type="button">Default Background</button>
+      </div>
+
+      <div class="panel-section">
+        <h3>Widget GIF / MP4</h3>
+        <label class="file-action" for="gifFile">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5h16v14H4z" />
+            <path d="M8 9h8" />
+            <path d="M8 13h5" />
+          </svg>
+          <span>Choose File</span>
+        </label>
+        <input id="gifFile" type="file" accept="image/gif,image/*,video/mp4,video/webm,video/*" />
+        <div class="input-row">
+          <input id="gifUrl" type="url" placeholder="GIF / MP4 URL" autocomplete="off" />
+          <button id="applyGifUrl" type="button">Apply</button>
+        </div>
+        <label class="range-line" for="gifSizeSlider">
+          <span>Height</span>
+          <input id="gifSizeSlider" type="range" min="160" max="340" step="10" value="260" />
+        </label>
+        <button class="secondary-action" id="clearGifButton" type="button">Clear Media</button>
+      </div>
+    </aside>
+
+    <audio id="audioPlayer" preload="metadata"></audio>
+    <script src="script.js"></script>
+  </body>
+</html>
